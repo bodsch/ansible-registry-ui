@@ -53,6 +53,8 @@ registry_notifications:
       disabled: false
       url: http://127.0.0.1:8080/api/events
       # headers: <http.Header>
+      headers:
+        Authorization: [Bearer 74RwH03rOPh8kTnIgcCqAWhgV3cGMAuz]
       timeout: 1s
       threshold: 10
       backoff: 10s

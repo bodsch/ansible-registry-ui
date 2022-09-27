@@ -11,4 +11,4 @@
 
   roles:
     - role: registry
-    # - role: ansible-registry-ui
+    - role: ansible-registry-ui

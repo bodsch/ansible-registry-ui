@@ -21,8 +21,9 @@ registry_ui_delete:
 registry_ui_event:
   deletion_enabled: true
   anyone_can_view: true
+  token: 74RwH03rOPh8kTnIgcCqAWhgV3cGMAuz
 
 registry_ui_cache:
-  refresh_interval: 1
+  refresh_interval: 10
 
 ...
