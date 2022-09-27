@@ -104,7 +104,7 @@ def local_facts(host):
     """
       return local facts
     """
-    return host.ansible("setup").get("ansible_facts").get("ansible_local").get("registry")
+    return host.ansible("setup").get("ansible_facts").get("ansible_local").get("registry-ui")
 
 
 def test_directories(host, get_vars):
@@ -170,7 +170,7 @@ def test_user(host, get_vars):
 def test_service(host, get_vars):
     """
     """
-    service = host.service("registry")
+    service = host.service("registry-ui")
     assert service.is_enabled
     assert service.is_running
 

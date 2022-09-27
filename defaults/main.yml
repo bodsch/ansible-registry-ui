@@ -1,6 +1,6 @@
 ---
 
-registry_ui_version: 0.9.5-rc1
+registry_ui_version: 0.9.5
 
 registry_ui_release_download_url: https://github.com/bodsch/docker-registry-ui/releases
 
