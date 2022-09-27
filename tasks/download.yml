@@ -1,0 +1,44 @@
+---
+
+- name: define checksum
+  block:
+    - name: d
+      debug:
+        msg:
+          - "{{ registry_ui_checksum_url }}"
+
+    - name: get checksum list
+      set_fact:
+        __registry_ui_checksums: "{{ lookup('url', registry_ui_checksum_url, wantlist=True) | list }}"
+      run_once: true
+
+    - name: get checksum for {{ system_architecture }} architecture
+      set_fact:
+        __registry_ui_checksum: "{{ __registry_ui_checksums[0] }}"
+  delegate_to: localhost
+
+- name: download registry-ui binary archive
+  become: false
+  delegate_to: "{{ registry_ui_delegate_to }}"
+  run_once: "{{ 'false' if registry_ui_direct_download else 'true' }}"
+  get_url:
+    url: "{{ registry_ui_release_download_url }}/download/{{ registry_ui_version }}/registry-ui-{{ registry_ui_version }}-{{ ansible_facts.system }}-{{ system_architecture }}.tar.gz"
+    dest: "{{ registry_ui_local_tmp_directory }}/registry-ui-{{ system_architecture }}.tar.gz"
+    checksum: "sha256:{{ __registry_ui_checksum }}"
+  register: _download_archive
+  until: _download_archive is succeeded
+  retries: 5
+  delay: 2
+  check_mode: false
+
+- name: extract registry-ui archive
+  become: false
+  delegate_to: "{{ registry_ui_delegate_to }}"
+  run_once: "{{ 'false' if registry_ui_direct_download else 'true' }}"
+  unarchive:
+    src: "{{ registry_ui_local_tmp_directory }}/registry-ui-{{ system_architecture }}.tar.gz"
+    dest: "{{ registry_ui_local_tmp_directory }}"
+    copy: false
+  register: _extract_archive
+
+...
