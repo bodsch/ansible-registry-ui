@@ -1,7 +1,9 @@
 
 # Ansible Role:  `registry-ui` 
 
-Ansible role to install and configure docker [registry-ui](https://github.com/Quiq/docker-registry-ui).
+Ansible role for installing and configuring Docker [registry-ui](https://github.com/Quiq/docker-registry-ui) 
+without dependencies on a container.  
+Natively supports systemd and openrc as init system.
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bodsch/ansible-registry-ui/CI)][ci]
 [![GitHub issues](https://img.shields.io/github/issues/bodsch/ansible-registry-ui)][issues]
