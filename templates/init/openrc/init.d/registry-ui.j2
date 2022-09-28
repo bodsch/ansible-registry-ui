@@ -5,14 +5,15 @@ pidfile=${pidfile:-"/run/${RC_SVCNAME}.pid"}
 user=${user:-${SVCNAME}}
 group=${group:-${SVCNAME}}
 
-command="/usr/bin/registry"
+command="/usr/bin/registry-ui"
 supervisor="supervise-daemon"
 
-command_args="${command_args:-serve /etc/docker/registry/config.yml}"
+command_args="${command_args:--config-file {{ registry_ui_config_dir }}/config.yml}"
 command_user="${user}:${group}"
 
 command_args_background="--background"
-required_files="/etc/docker/registry/config.yml"
+required_files="/etc/registry-ui/config.yml"
+directory="{{ registry_ui_data_dir }}"
 
 output_log="/var/log/${RC_SVCNAME}/${RC_SVCNAME}.log"
 error_log="${output_log}"
