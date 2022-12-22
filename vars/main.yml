@@ -63,7 +63,8 @@ registry_ui_defaults_purge:
 
 # ----------------------------------------------------------------------------------------
 
-registry_ui_checksum_url: "{{ registry_ui_release_download_url }}/download/{{ registry_ui_version }}/registry-ui-{{ registry_ui_version }}-{{ ansible_facts.system }}-{{ system_architecture }}.tar.gz.sha256"
+registry_ui_archive: "registry-ui-{{ registry_ui_version }}-{{ ansible_facts.system }}-{{ system_architecture }}.tar.gz"
+registry_ui_checksum_url: "{{ registry_ui_release_download_url }}/download/{{ registry_ui_version }}/{{ registry_ui_archive }}.sha256"
 
 registry_ui_defaults_directory: /etc/default
 

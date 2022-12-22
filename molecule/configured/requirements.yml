@@ -9,9 +9,6 @@
 - name: nginx
   src: bodsch.nginx
 
-# - name: htpasswd
-#   src: bodsch.htpasswd
-
 - name: redis
   src: bodsch.redis
 

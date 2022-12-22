@@ -2,22 +2,22 @@
 
 - name: restart registry-ui
   become: true
-  service:
+  ansible.builtin.service:
     name: registry-ui
     state: restarted
 
 - name: reload registry-ui
   become: true
-  service:
+  ansible.builtin.service:
     name: registry-ui
     state: reloaded
 
 - name: validate config
-  command: /bin/true
+  ansible.builtin.command: /bin/true
 
 - name: daemon-reload
   become: true
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
     force: true
   when:
