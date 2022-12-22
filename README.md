@@ -5,14 +5,15 @@ Ansible role for installing and configuring Docker [registry-ui](https://github.
 without dependencies on a container.  
 Natively supports systemd and openrc as init system.
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bodsch/ansible-registry-ui/CI)][ci]
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/bodsch/ansible-registry-ui/main.yml?branch=main)][ci]
 [![GitHub issues](https://img.shields.io/github/issues/bodsch/ansible-registry-ui)][issues]
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/bodsch/ansible-registry-ui)][releases]
+[![Ansible Quality Score](https://img.shields.io/ansible/quality/50067?label=role%20quality)][quality]
 
 [ci]: https://github.com/bodsch/ansible-registry-ui/actions
 [issues]: https://github.com/bodsch/ansible-registry-ui/issues?q=is%3Aopen+is%3Aissue
 [releases]: https://github.com/bodsch/ansible-registry-ui/releases
-
+[quality]: https://galaxy.ansible.com/bodsch/registry_ui
 
 If `latest` is set for `registry-ui_version`, the role tries to install the latest release version.  
 **Please use this with caution, as incompatibilities between releases may occur!**
