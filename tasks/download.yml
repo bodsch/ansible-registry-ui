@@ -1,13 +1,10 @@
 ---
 
 - name: define checksum
+  become: false
   delegate_to: localhost
+  run_once: true
   block:
-    - name: d
-      ansible.builtin.debug:
-        msg:
-          - "{{ registry_ui_checksum_url }}"
-
     - name: get checksum list
       ansible.builtin.set_fact:
         __registry_ui_checksums: "{{ lookup('url', registry_ui_checksum_url, wantlist=True) | list }}"

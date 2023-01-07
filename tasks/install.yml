@@ -3,6 +3,7 @@
 - name: detect extracted binary file for registry on {{ registry_ui_delegate_to }}
   become: false
   delegate_to: "{{ registry_ui_delegate_to }}"
+  run_once: "{{ 'false' if registry_ui_direct_download else 'true' }}"
   ansible.builtin.stat:
     path: "{{ registry_ui_local_tmp_directory }}/registry-ui"
   register: stat_file_binary
