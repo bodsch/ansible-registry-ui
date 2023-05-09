@@ -1,18 +1,29 @@
 ---
 
-- name: define checksum
+- name: checksum
   become: false
   delegate_to: localhost
   run_once: true
   block:
     - name: get checksum list
-      ansible.builtin.set_fact:
-        __registry_ui_checksums: "{{ lookup('url', registry_ui_checksum_url, wantlist=True) | list }}"
-      run_once: true
+      bodsch.scm.github_checksum:
+        project: bodsch
+        repository: docker-registry-ui
+        checksum_file: "{{ registry_ui_archive }}.sha256"
+        user: "{{ lookup('env', 'GH_USER') | default(omit) }}"
+        password: "{{ lookup('env', 'GH_TOKEN') | default(omit) }}"
+        architecture: "{{ ansible_architecture }}"
+        system: "{{ ansible_facts.system }}"
+        version: "{{ registry_ui_version }}"
+      register: _latest_checksum
 
-    - name: get checksum for {{ system_architecture }} architecture
+    - name: define checksum for {{ go_arch }} architecture
       ansible.builtin.set_fact:
-        __registry_ui_checksum: "{{ __registry_ui_checksums[0] }}"
+        __registry_ui_checksum: "{{ _latest_checksum.checksum }}"
+      when:
+        - _latest_checksum.rc == 0
+        - _latest_checksum.checksum is defined
+        - _latest_checksum.checksum | string | length > 0
 
 - name: download registry-ui binary archive
   become: false

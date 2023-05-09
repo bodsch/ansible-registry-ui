@@ -48,23 +48,19 @@
     - registry_ui_version == "latest"
   block:
     - name: get latest release
-      ansible.builtin.uri:
-        url: "https://api.github.com/repos/distribution/distribution/releases/latest"
-        method: GET
-        return_content: true
-        status_code: 200
-        body_format: json
-        validate_certs: false
+      delegate_to: localhost
+      become: false
+      run_once: true
+      bodsch.scm.github_latest:
+        project: bodsch
+        repository: docker-registry-ui
         user: "{{ lookup('env', 'GH_USER') | default(omit) }}"
         password: "{{ lookup('env', 'GH_TOKEN') | default(omit) }}"
-      # no_log: "{{ not lookup('env', 'ANSIBLE_DEBUG') | bool }}"
       register: _latest_release
-      until: _latest_release.status == 200
-      retries: 5
 
-    - name: set registry version
+    - name: re-define registry_ui_version
       ansible.builtin.set_fact:
-        registry_ui_version: "{{ _latest_release.json.tag_name[1:] }}"
+        registry_ui_version: "{{ _latest_release.latest_release }}"
 
 - name: detect installed registry-ui binary
   ansible.builtin.stat:
@@ -110,14 +106,6 @@
     owner: "{{ registry_ui_system_user }}"
     group: "{{ registry_ui_system_group }}"
     mode: 0755
-
-- name: create ansible local facts directory
-  ansible.builtin.file:
-    dest: /etc/ansible/facts.d
-    state: directory
-    owner: root
-    group: root
-    mode: 0775
 
 - name: merge registry configuration between defaults and custom
   ansible.builtin.set_fact:

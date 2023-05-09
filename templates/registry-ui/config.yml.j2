@@ -23,7 +23,7 @@ registry_url: {{ registry_ui_registry.url }}
   {% if registry_ui_registry.verify_tls is defined and
         registry_ui_registry.verify_tls %}
 # Verify TLS certificate when using https.
-verify_tls: {{ registry_ui_registry.verify_tls | bool | ternary('true', 'false') }}
+verify_tls: {{ registry_ui_registry.verify_tls | bool | bodsch.core.config_bool(true_as='true', false_as='false') }}
   {% endif %}
 # Docker registry credentials.
 # They need to have a full access to the registry.
@@ -89,10 +89,10 @@ event_database_location: {{ registry_ui_event.database.username }}:{{ registry_u
 
 # You can disable event deletion on some hosts when you are running docker-registry on master-master or
 # cluster setup to avoid deadlocks or replication break.
-event_deletion_enabled:  {{ registry_ui_event.deletion_enabled | bool | ternary('true', 'false') }}
+event_deletion_enabled:  {{ registry_ui_event.deletion_enabled | bool | bodsch.core.config_bool(true_as='true', false_as='false') }}
 
 # If all users can view the event log. If set to false, then only admins listed below.
-anyone_can_view_events: {{ registry_ui_event.anyone_can_view | bool | ternary('true', 'false') }}
+anyone_can_view_events: {{ registry_ui_event.anyone_can_view | bool | bodsch.core.config_bool(true_as='true', false_as='false') }}
 {% endif %}
 
 {% if registry_ui_cache is defined and
@@ -110,7 +110,7 @@ cache_refresh_interval: {{ registry_ui_cache.refresh_interval }}
   {% if registry_ui_delete.anyone_can_delete is defined and
         registry_ui_delete.anyone_can_delete %}
 # If all users can delete tags. If set to false, then only admins listed below.
-anyone_can_delete: {{ registry_ui_delete.anyone_can_delete | bool | ternary('true', 'false') }}
+anyone_can_delete: {{ registry_ui_delete.anyone_can_delete | bool | bodsch.core.config_bool(true_as='true', false_as='false') }}
   {% endif %}
   {% if registry_ui_delete.admins is defined and
         registry_ui_delete.admins %}
@@ -121,7 +121,7 @@ admins: [" {{ registry_ui_delete.admins | join(",") }}"]
 {% endif %}
 
 # Debug mode. Affects only templates.
-debug: {{ registry_ui_debug | default('false') | bool | ternary('true', 'false') }}
+debug: {{ registry_ui_debug | default('false') | bool | bodsch.core.config_bool(true_as='true', false_as='false') }}
 
 {% if registry_ui_purge is defined and
       registry_ui_purge | count > 0 %}
