@@ -104,7 +104,7 @@ def local_facts(host):
     """
       return local facts
     """
-    return host.ansible("setup").get("ansible_facts").get("ansible_local").get("registry-ui")
+    return host.ansible("setup").get("ansible_facts").get("ansible_local").get("registry_ui")
 
 
 def test_directories(host, get_vars):

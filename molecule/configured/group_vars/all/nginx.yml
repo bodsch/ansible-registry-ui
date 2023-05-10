@@ -55,7 +55,7 @@ nginx_custom_includes:
 
 
 nginx_vhosts:
-  registry:
+  - name: registry
     filename: 00-registry.conf
     state: present  # default: present
     enabled: true   # default: true
