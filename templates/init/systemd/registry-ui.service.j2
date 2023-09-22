@@ -2,7 +2,7 @@
 
 [Unit]
 Description      = registry ui, a Web UI for Docker Registry
-After            = network-online.target registry.service
+After            = network-online.target
 
 [Service]
 Type             = simple
@@ -20,6 +20,8 @@ ExecStart        = /usr/bin/registry-ui $OPTIONS
 LimitNOFILE      = 65000
 SyslogIdentifier = registry-ui
 Restart          = on-failure
+RestartSec       = 30s
+RestartSteps     = 20
 
 [Install]
 WantedBy         = multi-user.target
