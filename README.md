@@ -1,6 +1,15 @@
 
 # Ansible Role:  `registry-ui` 
 
+---
+
+> I have transferred this role to its own [collection](https://github.com/bodsch/ansible-collection-docker).  
+> In future, I will not accept or process any further pull requests or issues here.
+>
+> **Please use the linked collection from now on!**
+
+---
+
 Ansible role for installing and configuring Docker [registry-ui](https://github.com/Quiq/docker-registry-ui) 
 without dependencies on a container.  
 Natively supports systemd and openrc as init system.

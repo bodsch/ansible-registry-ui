@@ -2,6 +2,8 @@
 
 snakeoil_extract_to: /etc/snakeoil
 
+# snakeoil_force: true
+
 snakeoil_domain: matrix.lan
 
 snakeoil_life_time: 30
